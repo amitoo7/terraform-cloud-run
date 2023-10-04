@@ -1,11 +1,7 @@
-provider "google" {
-  credentials = file("/Users/amitgadhia/work/mywork/test/cloud_run/hauntapp.json")
-  project     = "hauntapp"
-}
 
 resource "google_cloud_run_service" "api-gateway" {
   name     = "api-gateway"
-  location = "us-central1"
+  location = "${var.gcp_region}"
   template {
     spec {
       containers {
@@ -25,7 +21,7 @@ resource "google_cloud_run_service" "api-gateway" {
 
 resource "google_cloud_run_service" "order-service" {
   name     = "order-service"
-  location = "us-central1"
+  location = "${var.gcp_region}"
   template {
     spec {
       containers {
@@ -45,7 +41,7 @@ resource "google_cloud_run_service" "order-service" {
 
 resource "google_cloud_run_service" "customer-service" {
   name     = "customer-service"
-  location = "us-central1"
+  location = "${var.gcp_region}"
   template {
     spec {
       containers {
